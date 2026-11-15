@@ -41,5 +41,13 @@ Simplemente escribimos en la línea de comandos: **deactivate**
 
 ## Antes de ejecutar los scripts
 
+## Scripts del repositorio (Grupo 3 - TP N° 4)
+
+- **`src/01_get-ticket.py`**: Autentica contra el endpoint `/api/v1/ticket` del Cisco Network Controller y obtiene el token (`serviceTicket`) necesario para autorizar las consultas posteriores.
+- **`src/02_get-network-device.py`**: Consulta `/api/v1/network-device` y muestra en formato JSON los routers y switches descubiertos por el controlador junto con su estado de gestión.
+- **`src/03_get-host.py`**: Consulta `/api/v1/host` y lista los equipos finales (PCs, laptops y servidores) detectados en la topología.
+- **`src/04_tabulate.py`**: Obtiene el listado de dispositivos administrados y los presenta en consola mediante una tabla formateada con la librería `tabulate`.
+- **`src/05_inventario_csv.py`** *(Script propio)*: Solicita las credenciales por consola de forma segura, consulta de manera unificada los endpoints `/api/v1/network-device` y `/api/v1/host`, imprime un resumen tabular completo en terminal y exporta todo el inventario (dispositivos de red y hosts finales con IP, MAC, estado y puerto de conexión) al archivo `inventario_red.csv` listo para abrir en Excel.
+
 - **Credenciales del controlador:** los scripts usan el usuario `cisco` y la clave `cisco123!`. Si en tu Network Controller creaste otro usuario, cambialos en `01_get-ticket.py` y en `04_tabulate.py`.
 - **Ticket (X-Auth-Token):** `02_get-network-device.py` y `03_get-host.py` traen escrito un ticket de ejemplo que **no va a funcionar** en tu Packet Tracer, porque el controlador genera uno nuevo en cada sesión y vence. Ejecutá primero `01_get-ticket.py`, copiá el ticket que muestra y reemplazalo en el header `X-Auth-Token` de esos dos scripts. `04_tabulate.py` no necesita este paso: pide el ticket solo.

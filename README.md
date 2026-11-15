@@ -1,4 +1,4 @@
-#Grupo N°: 3 Alumnos / Grupo:
+Grupo N°: 3 Alumnos / Grupo:
 •	Palmieri, Nahuel Tomas (45074926)
 •	Del Arco Pugliese, Guadalupe (45014753)
 •	Represas Panozzo, Gerónimo (46499184)

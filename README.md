@@ -1,3 +1,10 @@
+#Grupo N°: 3 Alumnos / Grupo:
+•	Palmieri, Nahuel Tomas (45074926)
+•	Del Arco Pugliese, Guadalupe (45014753)
+•	Represas Panozzo, Gerónimo (46499184)
+•	Di Salvio, Gian Luca (45236135)
+•	Jimenez, Rocio Ayelen ( 46644388) 
+
 # Entorno de virtualización Python
 
 # Pasos de instalación en Linux:

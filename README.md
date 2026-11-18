@@ -56,5 +56,14 @@ Simplemente escribimos en la línea de comandos: **deactivate**
 - **`src/04_tabulate.py`**: Obtiene el listado de dispositivos administrados y los presenta en consola mediante una tabla formateada con la librería `tabulate`.
 - **`src/05_importar_csv.py`** *(Script propio)*: Solicita las credenciales por consola de forma segura, consulta de manera unificada los endpoints `/api/v1/network-device` y `/api/v1/host`, imprime un resumen tabular completo en terminal y exporta todo el inventario (dispositivos de red y hosts finales con IP, MAC, estado y puerto de conexión) al archivo `inventario_red.csv` listo para abrir en Excel.
 
+### Scripts modificados (Manejo de excepciones ante equipos sin `hostname`)
+
+Durante las pruebas, si el Network Controller conserva en su inventario la interfaz externa del router ISP simulado (en estado *Wrong credential* y sin nombre de host asignado), los scripts originales de la cátedra arrojan un `KeyError: 'hostname'` al intentar leer esa clave directamente del diccionario JSON. Para evitar que la ejecución se interrumpa sin alterar los archivos base, se incluyen dentro de `src/` dos variantes tolerantes a fallos:
+
+- **`src/02_get-network-device_modificado.py`**: Variante de `02_get-network-device.py` en la que se modificó la **línea 20** reemplazando el acceso directo por corchetes (`networkDevice["hostname"]`) por el método seguro `.get()` con valores por defecto:
+  ```python
+  print(networkDevice.get("hostname", "Sin nombre"), "\t", networkDevice.get("platformId", "N/A"), "\t", networkDevice.get("managementIpAddress", "N/A"))
+
 - **Credenciales del controlador:** los scripts usan el usuario `cisco` y la clave `cisco123!`. Si en tu Network Controller creaste otro usuario, cambialos en `01_get-ticket.py` y en `04_tabulate.py`.
 - **Ticket (X-Auth-Token):** `02_get-network-device.py` y `03_get-host.py` traen escrito un ticket de ejemplo que **no va a funcionar** en tu Packet Tracer, porque el controlador genera uno nuevo en cada sesión y vence. Ejecutá primero `01_get-ticket.py`, copiá el ticket que muestra y reemplazalo en el header `X-Auth-Token` de esos dos scripts. `04_tabulate.py` no necesita este paso: pide el ticket solo.
+host_list.append([i, item.get("hostname", "Sin nombre"), item.get("serialNumber", "N/A"), item.get("softwareVersion", "N/A")])
